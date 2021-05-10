@@ -4,10 +4,6 @@ networks:
   backend:
     driver: ${NETWORKS_DRIVER}
 
-volumes:
-  postgres:
-    driver: ${VOLUMES_DRIVER}
-
 services:
 
   ### NGINX Server #########################################
@@ -40,17 +36,22 @@ services:
     networks:
       - backend
 
-  ### PostgreSQL ###########################################
-  postgres:
-    build: ./postgres
-    volumes:
-      - ${DATA_PATH_HOST}/postgres:/var/lib/postgresql/data
-      - ${POSTGRES_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
-    ports:
-      - "${POSTGRES_PORT}:5432"
+  ### MYSQL ###########################################
+  mysql:
+    build:
+      context: ./mysql
+      args:
+        - MYSQL_VERSION=${MYSQL_VERSION}
     environment:
-      - POSTGRES_DB=${POSTGRES_DB}
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - TZ=${WORKSPACE_TIMEZONE}
+    volumes:
+      - ${DATA_PATH_HOST}/mysql:/var/lib/mysql
+      - ${MYSQL_ENTRYPOINT_INITDB}:/docker-entrypoint-initdb.d
+    ports:
+      - "${MYSQL_PORT}:3306"
     networks:
       - backend

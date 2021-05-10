@@ -31,6 +31,7 @@ RUN apt-get update \
     software-properties-common \
     unzip \
     zip \
+    sqlite3 \
   && add-apt-repository -y ppa:ondrej/php \
   && apt-get update \
   && apt-get install -y \
@@ -41,6 +42,8 @@ RUN apt-get update \
     php7.4-imap \
     php7.4-mbstring \
     php7.4-pgsql \
+    php7.4-sqlite3 \
+    php7.4-mysql \
     php7.4-xml \
     php7.4-zip \
     php7.4-bcmath \
