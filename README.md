@@ -24,6 +24,10 @@ docker-compose exec php-fpm bash
 cd /var/www
 
 composer install
+
+# Create field .env and copy .env.example and paste in .env
+
+php artisan key:generate
 ```
 
 ## Running the tests
