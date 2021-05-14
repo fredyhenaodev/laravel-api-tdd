@@ -56,10 +56,10 @@ class StoreUserTest extends TestCase
 
         $user_model = User::first();
 
-        $this->assertEquals($user['name'], $user_model->name);
-        $this->assertEquals($user['last_name'], $user_model->last_name);
-        $this->assertEquals($user['email'], $user_model->email);
-        $this->assertEquals($user['phone'], $user_model->phone);
+        $this->assertEquals($user[self::FIELD_NAME], $user_model->name);
+        $this->assertEquals($user[self::FIELD_LAST_NAME], $user_model->last_name);
+        $this->assertEquals($user[self::FIELD_EMAIL], $user_model->email);
+        $this->assertEquals($user[self::FIELD_PHONE], $user_model->phone);
     }
 
     /**
@@ -79,7 +79,7 @@ class StoreUserTest extends TestCase
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
-                    'name' => ['The name field is required.']
+                    self::FIELD_NAME => ['The name field is required.']
                 ]
             ]);
 
@@ -103,7 +103,7 @@ class StoreUserTest extends TestCase
             ->assertStatus(422)
             ->assertJson([
                 'errors' => [
-                    'name' => ['The name must be a string.']
+                    self::FIELD_NAME => ['The name must be a string.']
                 ]
             ]);
 
