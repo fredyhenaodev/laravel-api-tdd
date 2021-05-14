@@ -6,6 +6,15 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
+/**
+ * Class UserController
+ *
+ * Run test for this file
+ * php artisan test tests/Feature/StoreUserTest
+ * php artisan test --filter StoreUserTest
+ *
+ * @package Tests\Feature
+ */
 class StoreUserTest extends TestCase
 {
     use RefreshDatabase;

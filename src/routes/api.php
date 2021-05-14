@@ -15,5 +15,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => '/v1/users'], function () {
     Route::post('/', ['uses' => 'UserController@store']);
+    Route::get('/{id}', ['uses' => 'UserController@show']);
 });
 
